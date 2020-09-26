@@ -1,0 +1,76 @@
+
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="128" height="128" viewBox="0 0 100 100">
+
+
+		<defs>
+			<linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="50" y1="100" x2="50" y2="16" spreadMethod="pad">
+			<stop offset="0%" stop-color="#D1D3D4"/>
+			<stop offset="100%" stop-color="#F1F2F2"/>
+		</linearGradient><radialGradient id="Gradient_2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="50" fx="0" fy="0" gradientTransform="matrix( 1, 0, 0, 1, 50,50) " spreadMethod="pad">
+			<stop offset="27.84313725490196%" stop-color="#231F20"/>
+			<stop offset="100%" stop-color="#BCBEC0"/>
+		</radialGradient><linearGradient id="gloss-top-gradient" gradientUnits="userSpaceOnUse" x1="50" y1="55" x2="50" y2="24" spreadMethod="pad">
+			<stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+			<stop offset="100%" stop-color="#FFFFFF"/>
+		</linearGradient><linearGradient id="gloss-right-gradient" gradientUnits="userSpaceOnUse" x1="50" y1="72" x2="50" y2="27" spreadMethod="pad">
+			<stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+			<stop offset="100%" stop-color="#FFFFFF"/>
+		</linearGradient><linearGradient id="gloss-left-gradient" gradientUnits="userSpaceOnUse" x1="50" y1="72" x2="50" y2="27" spreadMethod="pad">
+			<stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+			<stop offset="100%" stop-color="#FFFFFF"/>
+		</linearGradient><g id="top-1">
+			<path fill="url(#Gradient_1)" stroke="none" d=" M 94.85 5.15 Q 89.7 0 82.45 0 L 17.55 0 Q 10.25 0 5.15 5.15 0 10.3 0 17.55 L 0 82.5 Q 0 89.75 5.15 94.9 10.25 100 17.55 100 L 82.45 100 Q 89.7 100 94.85 94.9 100 89.75 100 82.5 L 100 17.55 Q 100 10.3 94.85 5.15 M 89.65 20.8 L 89.65 79.25 Q 89.65 89.7 79.25 89.7 L 20.75 89.7 Q 10.35 89.7 10.35 79.25 L 10.35 20.8 Q 10.35 10.35 20.75 10.35 L 79.25 10.35 Q 89.65 10.35 89.65 20.8 Z"/>
+			<path fill="#FFFFFF" stroke="none" d=" M 89.65 79.25 L 89.65 20.8 Q 89.65 10.35 79.25 10.35 L 20.75 10.35 Q 10.35 10.35 10.35 20.8 L 10.35 79.25 Q 10.35 89.7 20.75 89.7 L 79.25 89.7 Q 89.65 89.7 89.65 79.25 M 87.3 20.5 L 87.3 79.55 Q 87.3 87.3 79.5 87.3 L 20.45 87.3 Q 12.7 87.3 12.7 79.55 L 12.7 20.5 Q 12.7 12.7 20.45 12.7 L 79.5 12.7 Q 87.3 12.7 87.3 20.5 Z"/>
+			<path fill="url(#Gradient_2)" stroke="none" d=" M 87.3 79.55 L 87.3 20.5 Q 87.3 12.7 79.5 12.7 L 20.45 12.7 Q 12.7 12.7 12.7 20.5 L 12.7 79.55 Q 12.7 87.3 20.45 87.3 L 79.5 87.3 Q 87.3 87.3 87.3 79.55 Z"/>
+		</g><g id="background">
+			<path stroke="none" d=" M 82.05 76.2 L 82.05 23.8 Q 82.05 21.35 80.35 19.65 78.65 17.95 76.2 17.95 L 23.8 17.95 Q 21.35 17.95 19.65 19.65 17.95 21.35 17.95 23.8 L 17.95 76.2 Q 17.95 78.65 19.65 80.35 21.35 82.05 23.8 82.05 L 76.2 82.05 Q 78.65 82.05 80.35 80.35 82.05 78.65 82.05 76.2 Z"/>
+		</g><mask id="mask">
+			<path fill="#FFFFFF" stroke="none" d=" M 82.05 76.2 L 82.05 23.8 Q 82.05 21.35 80.35 19.65 78.65 17.95 76.2 17.95 L 23.8 17.95 Q 21.35 17.95 19.65 19.65 17.95 21.35 17.95 23.8 L 17.95 76.2 Q 17.95 78.65 19.65 80.35 21.35 82.05 23.8 82.05 L 76.2 82.05 Q 78.65 82.05 80.35 80.35 82.05 78.65 82.05 76.2 Z"/>
+		</mask><g id="gloss-top">
+			<path fill="url(#gloss-top-gradient)" stroke="none" d=" M 82.05 45.35 L 82.05 23.8 Q 82.05 21.35 80.35 19.65 78.65 17.95 76.2 17.95 L 23.75 17.95 Q 21.35 17.95 19.65 19.65 17.95 21.35 17.95 23.8 L 17.95 45.35 Q 24.5 49.8 32.55 52.25 40.95 54.75 50 54.75 59.05 54.75 67.4 52.25 75.5 49.8 82.05 45.35 Z"/>
+		</g><g id="gloss-right">
+			<path fill="url(#gloss-right-gradient)" stroke="none" d=" M 82.05 72.1 L 82.05 23.8 Q 82.05 21.35 80.35 19.65 78.65 17.95 76.2 17.95 L 23.75 17.95 Q 21.35 17.95 19.65 19.65 17.95 21.35 17.95 23.8 L 17.95 40.7 Q 28.45 51.4 42.6 58.95 60 68.2 82.05 72.1 Z"/>
+		</g><g id="gloss-left">
+			<path fill="url(#gloss-left-gradient)" stroke="none" d=" M 82.05 40.7 L 82.05 23.8 Q 82.05 21.35 80.35 19.65 78.65 17.95 76.2 17.95 L 23.75 17.95 Q 21.35 17.95 19.65 19.65 17.95 21.35 17.95 23.8 L 17.95 72.1 Q 39.95 68.2 57.4 58.95 71.55 51.45 82.05 40.7 Z"/>
+		</g>
+			
+	<linearGradient id="background-gradient" x1="0" y1="0" y2="1" x2="0" >
+		<stop stop-color="#9BFEF2" offset="0%"/>
+		<stop stop-color="#D2FFFF" offset="100%"/>
+	</linearGradient>
+
+			
+			
+			<g transform="scale(3.3333333333333335)" id="picture">
+    <path d="M.5 8.6c-.3 0-.5-.3-.5-.5V5.5c0-1.7 1.4-3 3-3h2.5c.3 0 .5.2.5.5s-.2.5-.5.5H3c-1.1 0-2 .9-2 2V8c0 .3-.2.6-.5.6zm29 0c-.3 0-.5-.2-.5-.5V5.5c0-1.1-.9-2-2-2h-2.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5H27c1.7 0 3 1.4 3 3V8c0 .3-.2.6-.5.6zm-24 18.9H3c-1.7 0-3-1.4-3-3V22c0-.3.2-.5.5-.5s.5.2.5.5v2.5c0 1.1.9 2 2 2h2.5c.3 0 .5.2.5.5s-.2.5-.5.5zm21.5 0h-2.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5H27c1.1 0 2-.9 2-2V22c0-.3.2-.5.5-.5s.5.2.5.5v2.5c0 1.6-1.4 3-3 3zm2.5-11H.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h29c.3 0 .5.2.5.5s-.2.5-.5.5zm-14.5 4c-1.7 0-3.2-.8-4.2-2.2-.2-.2-.1-.5.1-.7s.5-.1.7.1c.7 1.1 2 1.8 3.3 1.8s2.6-.7 3.3-1.8c.2-.2.5-.3.7-.1.2.2.3.5.1.7-.8 1.4-2.3 2.2-4 2.2z"/>
+    <path d="M19.4 16.5h-8.9c-.3 0-.5-.2-.5-.4v-.5c0-2.8 2.2-5 5-5s5 2.2 5 5v.5c-.1.2-.3.4-.6.4zm-8.4-1h8c0-2.2-1.8-4-4-4s-4 1.8-4 4z"/>
+    <path d="M25.5 16.5h-21c-.3 0-.5-.2-.5-.5v-.5c0-4.4 4.9-8 11-8s11 3.6 11 8v.5c-.1.2-.3.5-.5.5zM5 15.5h20c0-3.9-4.5-7-10-7s-10 3.1-10 7zm10 8c-4.6 0-8.8-2.1-10.3-5.3-.1-.2 0-.5.2-.7.2-.1.5 0 .7.2 1.4 2.8 5.2 4.7 9.4 4.7s8-1.9 9.4-4.7c.1-.2.4-.3.7-.2.2.1.3.4.2.7-1.5 3.2-5.7 5.3-10.3 5.3z"/>
+</g>
+			
+		</defs>
+
+		<use xlink:href="#top-1" />
+
+			<use xlink:href="#background" fill="url(#background-gradient)" />
+
+		
+
+			<g mask="url(#mask)">
+				<g transform="
+				        translate(
+                                50 50
+)
+                            translate(0 0)  scale(0.5)  
+                            translate(
+                                -50 -50
+)">
+						<use xlink:href="#picture"   />
+				</g>
+			</g>
+
+		
+
+			<use xlink:href="#gloss-left" opacity="1" />
+
+
+	</svg>
