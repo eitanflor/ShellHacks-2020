@@ -2,10 +2,14 @@
   <library name="src">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/mssql-jdbc-8.4.1.jre8.jar!/" />
+      <root url="file://$PROJECT_DIR$/src/jar_files" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="file://$PROJECT_DIR$/src" />
+      <root url="file://$PROJECT_DIR$/src/jar_files" />
     </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/src/jar_files" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/src/jar_files" recursive="false" type="SOURCES" />
   </library>
 </component>
