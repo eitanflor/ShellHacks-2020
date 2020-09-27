@@ -34,11 +34,11 @@ An example of the constructed GUI prepopulated with information from the cloud i
 
 ## Getting Started
 1. Ensure that the Google Cloud SDK is installed and configured properly.
-  - A. Follow the instructions and documentation located [here]().
+  - A. Follow the instructions and documentation located [here](https://cloud.google.com/sdk/docs/install).
 
 
 2. Ensure that the Google Cloud SQL Proxy is installed and configured properly.
-  - A. Follow the instructions and documentation located [here]().
+  - A. Follow the instructions and documentation located [here](https://cloud.google.com/sql/docs/mysql/sql-proxy).
 
 
 3. Ensure that a recent version of Python is installed (i.e., > 3.5).
