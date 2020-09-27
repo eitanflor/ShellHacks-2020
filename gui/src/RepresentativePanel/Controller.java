@@ -4,18 +4,14 @@ import java.io.FileInputStream;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.*;
 
-
 import com.google.cloud.storage.Blob;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -36,28 +32,10 @@ public class Controller {
     private TextArea cust_Info;
 
     @FXML
-    private TableView<Car> service_Table;
-
-    @FXML
-    private TableColumn<Car, String> year_Column;
-
-    @FXML
-    private TableColumn<Car, String> make_Column;
-
-    @FXML
-    private TableColumn<Car, String> model_Column;
-
-    @FXML
-    private TableColumn<Car, String> vin_Column;
-
-    @FXML
-    private TableColumn<Car, String> descript_Column;
+    private TextArea service_Info;
 
     @FXML
     private Button check_Button;
-
-    @FXML
-    private Button update_Button;
 
     @FXML
     private Label date_Time;
@@ -70,9 +48,8 @@ public class Controller {
         String PROJECT_ID = "shellhacks-2020";
         String PATH_TO_JSON_KEY = "D:\\ShellHacks2020\\gui\\src\\key.json";
         String BUCKET_NAME = "car-license-plate-data";
-        String OBJECT_NAME = "2020-09-26-22-54-55.txt";
+        String OBJECT_NAME = "2020-09-27-07-23-26.txt";
 
-        //StorageOptions options;
         {
             try {
                 options = StorageOptions.newBuilder()
@@ -90,7 +67,8 @@ public class Controller {
 
         SQLDatabaseConnection sql_Test = new SQLDatabaseConnection();
         sql_Test.sql_Start(value);
-        Customer cust = new Customer(sql_Test.data[0],sql_Test.data[1],sql_Test.data[2],sql_Test.data[3],sql_Test.data[4],sql_Test.data[5],sql_Test.data[6]);
+        //String _first, String _last, String _sex, String _address, String _phone, String _email, String _DOB
+        Customer cust = new Customer(sql_Test.data[1],sql_Test.data[2],sql_Test.data[4],sql_Test.data[5],sql_Test.data[6],sql_Test.data[7],sql_Test.data[3]);
         cust_Info.setText(
                 "Name: " + cust.get_First() + " " + cust.get_Last()
                         + "\n\nSex: " + cust.get_Sex()
@@ -100,32 +78,29 @@ public class Controller {
                         + "\n\nEmail: " + cust.get_Email()
         );
 
-
-        final ObservableList<Car> table_Data = FXCollections.observableArrayList(
-                new Car("VIN1", "PLATE1", "COLOR1", "MAKE1", "MODEL1", "YEAR1", "STATE1"),
-                new Car("VIN2", "PLATE2", "COLOR2", "MAKE2", "MODEL2", "YEAR2", "STATE2"),
-                new Car("VIN3", "PLATE3", "COLOR3", "MAKE3", "MODEL3", "YEAR3", "STATE3"),
-                new Car("VIN4", "PLATE4", "COLOR4", "MAKE4", "MODEL4", "YEAR4", "STATE4"),
-                new Car("VIN5", "PLATE5", "COLOR5", "MAKE5", "MODEL5", "YEAR5", "STATE5")
+        SQLDatabaseConnection service_Test = new SQLDatabaseConnection();
+        service_Test.sql_Start(value);
+        //String _vin, String _plate, String _color, String _make, String _model, String _year, String _state
+        Car car = new Car(service_Test.data[12],service_Test.data[13],service_Test.data[14],service_Test.data[10],service_Test.data[11],
+                service_Test.data[9], service_Test.data[15]);
+        //String _time_Start, String _time_End, String _employee, String _invoice, String _discount, String _desc
+        Service serv = new Service(service_Test.data[16],service_Test.data[17],service_Test.data[18],service_Test.data[19],service_Test.data[20],
+                service_Test.data[21]);
+        service_Info.setText(
+                "Year: " + car.get_Year() +
+                        "\nMake: " + car.get_Make() +
+                        "\nModel: " + car.get_Model() +
+                        "\nVIN#: " + car.get_Vin() +
+                        "\nPlate: " + car.get_Plate() +
+                        "\nColor: " + car.get_Color() +
+                        "\nState: " + car.get_State() +
+                        "\n\nTime Start: " + serv.getTime_Start() +
+                        "\nTime End: " + serv.getTime_End() +
+                        "\nEmployeeID: " + serv.getEmployee() +
+                        "\nInvoice: $" + serv.getInvoice() +
+                        "\nDiscount: " + serv.getDiscount() +
+                        "%\nDescription: " + serv.getDescription()
         );
-        /*vin_Column.setCellValueFactory(
-                new PropertyValueFactory<Car,String>("VIN")
-        );
-        year_Column.setCellValueFactory(
-                new PropertyValueFactory<Car,String>("YEAR")
-        );
-        make_Column.setCellValueFactory(
-                new PropertyValueFactory<Car,String>("MAKE")
-        );
-        model_Column.setCellValueFactory(
-                new PropertyValueFactory<Car,String>("MODEL")
-        );
-        descript_Column.setCellValueFactory(
-                new PropertyValueFactory<Car,String>("Description")
-        );
-
-        service_Table.setItems(table_Data);
-        service_Table.getColumns().addAll(vin_Column,year_Column,make_Column,model_Column,descript_Column);*/
     }
 
     @FXML
@@ -137,6 +112,9 @@ public class Controller {
         }), new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
+
+
+
     }
 
     public static class Customer{
@@ -226,16 +204,16 @@ public class Controller {
     }
 
     public static class Car{
-        private String vin;
-        private String plate;
-        private String color;
-        private String make;
-        private String model;
-        private String year;
-        private String state;
+        public String VIN;
+        public String plate;
+        public String color;
+        public String make;
+        public String model;
+        public String year;
+        public String state;
 
         private Car(String _vin, String _plate, String _color, String _make, String _model, String _year, String _state){
-            this.vin = _vin;
+            this.VIN = _vin;
             this.plate = _plate;
             this.color = _color;
             this.make = _make;
@@ -245,21 +223,21 @@ public class Controller {
         }
 
         private Car(){
-            this.vin = "";
-            this.plate = "";
-            this.color = "";
-            this.make = "";
-            this.model = "";
-            this.year = "";
-            this.state = "";
+            this.VIN = "N/A";
+            this.plate = "N/A";
+            this.color = "N/A";
+            this.make = "N/A";
+            this.model = "N/A";
+            this.year = "N/A";
+            this.state = "N/A";
         }
 
         public String get_Vin(){
-            return this.vin;
+            return this.VIN;
         }
 
         public void set_Vin(String _vin){
-            this.vin = _vin;
+            this.VIN = _vin;
         }
 
         public String get_Plate(){
@@ -312,36 +290,94 @@ public class Controller {
 
     }
 
+    public static class Service{
+        public String time_Start;
+        public String time_End;
+        public String employee;
+        public String invoice;
+        public String discount;
+        public String description;
+
+        public Service(){
+            this.time_Start = "N/A";
+            this.time_End = "N/A";
+            this.employee = "N/A";
+            this.invoice = "N/A";
+            this.discount = "N/A";
+            this.description = "N/A";
+        }
+
+        public Service(String _time_Start, String _time_End, String _employee, String _invoice, String _discount, String _desc){
+            this.time_Start = _time_Start;
+            this.time_End = _time_End;
+            this.employee = _employee;
+            this.invoice = _invoice;
+            float dis = Float.parseFloat(_discount);
+            dis = dis * 100;
+            _discount = String.valueOf(dis);
+            this.discount = _discount;
+            this.description = _desc;
+        }
+
+        public void setTime_Start(String time_Start) {
+            this.time_Start = time_Start;
+        }
+
+        public String getTime_Start() {
+            return time_Start;
+        }
+
+        public void setTime_End(String time_End) {
+            this.time_End = time_End;
+        }
+
+        public String getTime_End() {
+            return time_End;
+        }
+
+        public String getEmployee() {
+            return employee;
+        }
+
+        public void setEmployee(String employee) {
+            this.employee = employee;
+        }
+
+        public String getInvoice() {
+            return invoice;
+        }
+
+        public void setInvoice(String invoice) {
+            this.invoice = invoice;
+        }
+
+        public String getDiscount() {
+            return discount;
+        }
+
+        public void setDiscount(String discount) {
+            this.discount = discount;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+    }
+
+
     public class SQLDatabaseConnection {
 
         // Connect to your database.
         // Replace server name, username, and password with your credentials
         private ResultSet cust_Data;
-        private String data[] = new String[7];
-
-
-        /*String PROJECT_ID = "shellhacks-2020";
-        String PATH_TO_JSON_KEY = "D:\\ShellHacks2020\\gui\\src\\key.json";
-        String BUCKET_NAME = "car-license-plate-data";
-        String OBJECT_NAME = "2020-09-26-22-54-55.txt";
-
-        StorageOptions options;
-        {
-            try {
-                options = StorageOptions.newBuilder()
-                        .setProjectId(PROJECT_ID)
-                        .setCredentials(GoogleCredentials.fromStream(
-                                new FileInputStream(PATH_TO_JSON_KEY))).build();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        Storage storage = options.getService();
-        Bucket bucket = storage.get(BUCKET_NAME);
-        Blob blob = bucket.get(OBJECT_NAME);
-        public String value = new String(blob.getContent());*/
+        private String data[] = new String[23];
 
         public void sql_Start(String plate) {
+            System.out.println(plate);
             String connectionUrl =
                     "jdbc:sqlserver://127.0.0.1:3306;"
                             + "database=AutoNation;"
@@ -352,13 +388,12 @@ public class Controller {
                  Statement statement = connection.createStatement()) {
 
                 // Create and execute a SELECT SQL statement.
-                //String _first, String _last, String _sex, String _address, String _phone, String _email, String _DOB
-                String selectSql = "select c.first_name,c.last_name,c.sex,c.address,c.contact_mobile,c.contact_email,c.date_of_birth from customer c join car on car.customer_id=c.id where license_plate = '" + plate + "'";
+                String selectSql = "select top(1) cu.*, c.year as 'Year', c.make as 'Make', c.model as 'Model', c.vin as 'Vin#', c.license_plate as 'Plate', c.color as 'Color', c.state as 'State', a.start_time as 'Time Start', a.end_time as 'Time End', a.employee_id as 'EmployeeID', a.price_final as 'Invoice', a.discount as 'Discount', a.notes as 'Description' from car c join appointment a on c.id = a.car_id join customer cu on cu.id = a.customer_id where c.license_plate = '" + plate + "'";
                 cust_Data = statement.executeQuery(selectSql);
                 System.out.println(cust_Data);
 
                 while (cust_Data.next()) {
-                    for(int i = 0; i < 7; i++) {
+                    for(int i = 0; i < 22; i++) {
                         data[i] = cust_Data.getString(i + 1);
                         System.out.println(data[i]);
                     }
