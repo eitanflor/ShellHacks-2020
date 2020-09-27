@@ -1,8 +1,11 @@
 package RepresentativePanel;
 
 import java.io.FileInputStream;
-import java.sql.*;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.*;
 
+
+import com.google.cloud.storage.Blob;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,16 +17,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import javax.print.DocFlavor;
+import java.io.IOException;
+import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
+
 
 public class Controller {
 
@@ -60,12 +62,35 @@ public class Controller {
     @FXML
     private Label date_Time;
 
+    StorageOptions options;
+
     @FXML
-    void load_Customer(MouseEvent event) {
+    void load_Customer(MouseEvent event) throws SQLException{
+
+        String PROJECT_ID = "shellhacks-2020";
+        String PATH_TO_JSON_KEY = "D:\\ShellHacks2020\\gui\\src\\key.json";
+        String BUCKET_NAME = "car-license-plate-data";
+        String OBJECT_NAME = "2020-09-26-22-54-55.txt";
+
+        //StorageOptions options;
+        {
+            try {
+                options = StorageOptions.newBuilder()
+                        .setProjectId(PROJECT_ID)
+                        .setCredentials(GoogleCredentials.fromStream(
+                                new FileInputStream(PATH_TO_JSON_KEY))).build();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Storage storage = options.getService();
+        Bucket bucket = storage.get(BUCKET_NAME);
+        Blob blob = bucket.get(OBJECT_NAME);
+        String value = new String(blob.getContent());
+
         SQLDatabaseConnection sql_Test = new SQLDatabaseConnection();
-        sql_Test.sql_Start();
-        //sql_Test.cust_Data
-        Customer cust = new Customer();
+        sql_Test.sql_Start(value);
+        Customer cust = new Customer(sql_Test.data[0],sql_Test.data[1],sql_Test.data[2],sql_Test.data[3],sql_Test.data[4],sql_Test.data[5],sql_Test.data[6]);
         cust_Info.setText(
                 "Name: " + cust.get_First() + " " + cust.get_Last()
                         + "\n\nSex: " + cust.get_Sex()
@@ -156,7 +181,7 @@ public class Controller {
         }
 
         public void set_Last(String _last){
-            this.first_Name = _last;
+            this.last_Name = _last;
         }
 
         public String get_Sex(){
@@ -164,7 +189,7 @@ public class Controller {
         }
 
         public void set_Sex(String _sex){
-            this.first_Name = _sex;
+            this.sex = _sex;
         }
 
         public String get_Address(){
@@ -172,7 +197,7 @@ public class Controller {
         }
 
         public void set_Address(String _address){
-            this.first_Name = _address;
+            this.address = _address;
         }
 
         public String get_Phone(){
@@ -180,7 +205,7 @@ public class Controller {
         }
 
         public void set_Phone(String _phone){
-            this.first_Name = _phone;
+            this.phone = _phone;
         }
 
         public String get_Email(){
@@ -188,7 +213,7 @@ public class Controller {
         }
 
         public void set_email(String _email){
-            this.first_Name = _email;
+            this.email = _email;
         }
 
         public String get_DOB(){
@@ -287,28 +312,36 @@ public class Controller {
 
     }
 
-
-    String PROJECT_ID = "my-project";
-    String PATH_TO_JSON_KEY = "/path/to/json/key";
-    String BUCKET_NAME = "my-bucket";
-    String OBJECT_NAME = "my-object";
-
-    /*StorageOptions options = StorageOptions.newBuilder()
-            .setProjectId(PROJECT_ID)
-            .setCredentials(GoogleCredentials.fromStream(
-                    new FileInputStream(PATH_TO_JSON_KEY))).build();
-
-    Storage storage = options.getService();
-    Blob blob = storage.get(BUCKET_NAME, OBJECT_NAME);
-    ReadChannel r = blob.reader();*/
-
     public class SQLDatabaseConnection {
 
         // Connect to your database.
         // Replace server name, username, and password with your credentials
-        public ResultSet cust_Data;
+        private ResultSet cust_Data;
+        private String data[] = new String[7];
 
-        public void sql_Start() {
+
+        /*String PROJECT_ID = "shellhacks-2020";
+        String PATH_TO_JSON_KEY = "D:\\ShellHacks2020\\gui\\src\\key.json";
+        String BUCKET_NAME = "car-license-plate-data";
+        String OBJECT_NAME = "2020-09-26-22-54-55.txt";
+
+        StorageOptions options;
+        {
+            try {
+                options = StorageOptions.newBuilder()
+                        .setProjectId(PROJECT_ID)
+                        .setCredentials(GoogleCredentials.fromStream(
+                                new FileInputStream(PATH_TO_JSON_KEY))).build();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Storage storage = options.getService();
+        Bucket bucket = storage.get(BUCKET_NAME);
+        Blob blob = bucket.get(OBJECT_NAME);
+        public String value = new String(blob.getContent());*/
+
+        public void sql_Start(String plate) {
             String connectionUrl =
                     "jdbc:sqlserver://127.0.0.1:3306;"
                             + "database=AutoNation;"
@@ -316,18 +349,19 @@ public class Controller {
                             + "password=5663003;";
 
             try (Connection connection = DriverManager.getConnection(connectionUrl);
-                 Statement statement = connection.createStatement();) {
+                 Statement statement = connection.createStatement()) {
 
                 // Create and execute a SELECT SQL statement.
-                String selectSql = "select c.first_name,c.last_name,c.date_of_birth from customer c join car on car.customer_id=c.id where license_plate = 'IHPH69'";
+                //String _first, String _last, String _sex, String _address, String _phone, String _email, String _DOB
+                String selectSql = "select c.first_name,c.last_name,c.sex,c.address,c.contact_mobile,c.contact_email,c.date_of_birth from customer c join car on car.customer_id=c.id where license_plate = '" + plate + "'";
                 cust_Data = statement.executeQuery(selectSql);
+                System.out.println(cust_Data);
 
-                // Print results from select statement
                 while (cust_Data.next()) {
-                    System.out.println(cust_Data.getString(1) + " "
-                            + cust_Data.getString(2) + " "
-                            + cust_Data.getString(3)
-                    );
+                    for(int i = 0; i < 7; i++) {
+                        data[i] = cust_Data.getString(i + 1);
+                        System.out.println(data[i]);
+                    }
                 }
             }
             catch (SQLException e) {
@@ -335,4 +369,6 @@ public class Controller {
             }
         }
     }
+
 }
+
