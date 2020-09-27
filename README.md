@@ -57,7 +57,7 @@ git clone https://github.com/eitanflor/ShellHacks-2020.git
 ## Example Usage
 A large portion of the functionality resides in the cloud, as such, it is suggested to replicate the cloud infrastructure as depicted in the above [diagram](docs/diagrams/pyVision_Cloud_Infrastructure.svg). As an alternative, the python portion of our implementation is independent and will process and return the extracted License Plate text from an image, this can be done in the following steps:
 
-1. Open [API_utils.py](visionAPI/API_utils.py) and change the location path to your native Google Secret Key file as declared in
+1. Open [API_utils.py](visionAPI/api_utils.py) and change the location path to your native Google Secret Key file as declared in
 
 ```py
 os.environ['GOOGLE_APPLICATION_CREDENTIALS']='path/to/your/key/file.json'
