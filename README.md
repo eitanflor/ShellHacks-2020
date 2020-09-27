@@ -14,3 +14,8 @@
 Eitan Flor - eflor054@fiu.edu
 
 ## Acknowledgements
+
+* [Google Cloud Vision Documentation](https://cloud.google.com/vision/docs/how-to)
+* [Car VIN Generator](https://vingenerator.org/)
+* []()
+* []()

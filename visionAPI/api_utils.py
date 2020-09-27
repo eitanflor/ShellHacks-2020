@@ -1,6 +1,9 @@
 import io
 import os
-from google.cloud import vision
+import pickle
+import codecs
+from datetime import datetime
+from google.cloud import storage, vision
 from google.cloud.vision import types
 from shapely.geometry import Polygon
 
@@ -106,6 +109,9 @@ def extract_license_plate(image):
         final_res = list(set(reduced_list) - set(indices_list))
         final_res = final_res[0].strip().replace(" ", "")
         print("\nLicense Plate for Image is: {}\n".format(final_res))
+        file = codecs.open("{}".format(datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))+".txt","w", "utf-8")
+        file.write(final_res)
+        file.close()
     
     # Final case; identify License Plate Value by text size
     # i.e., Area of Bounding Polygon   
@@ -124,3 +130,20 @@ def extract_license_plate(image):
             max_index = areas.index(max(areas))
             final_res = text_contents_list[max_index].strip().replace(" ", "")
         print("\nLicense Plate for Image is: {}\n".format(final_res))
+        file = codecs.open("{}.txt".format(datetime.now().strftime("%Y-%m-%d-%H-%M-%S")), "w", "utf-8")
+        file.write(final_res)
+        file.close()
+        
+def save_to_cloud(bucket_name, file_name, destination_name):
+    
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(destination_name)
+    
+    blob.upload_from_filename(file_name)
+    
+    print('File {} successfully uploaded to Google Storage Bucket: {}.'.format(destination_name, bucket_name))
+    
+    
+    
+    
