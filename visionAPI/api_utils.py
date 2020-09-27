@@ -144,6 +144,3 @@ def save_to_cloud(bucket_name, file_name, destination_name):
     
     print('File {} successfully uploaded to Google Storage Bucket: {}.'.format(destination_name, bucket_name))
     
-    
-    
-    
