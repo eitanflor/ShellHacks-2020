@@ -10,13 +10,18 @@ This project has the potential to further expand on the existing cloud infrastru
 
 <p align=center><img align=center src='docs/diagrams/pyVision_Cloud_Infrastructure.svg' width=1000/></p>
 
-Our Database design and modeling (schema) is depicted below for reference:
+Our Database design and modeling (schema) is depicted below for reference
 
 <p align=center><img align=center src='docs/diagrams/AutoNation_Schema.png' width=1000/></p>
 
-To view the end goal and the holistic approach of our project, please preview the demo below:
+To view the end goal and the holistic approach of our project, please preview the demo below
 
 <p align=center><img align=center src='docs/demo/demo.gif' width=1000/></p>
+
+An example of the constructed GUI prepopulated with information from the cloud infrastructure is displayed below
+
+<p align=center><img align=center src='docs/images/GUI-example.png' width=1000/></p>
+
 
 #### Technologies and Software Used:
 * Google Cloud Platform (GCP)
