@@ -94,10 +94,11 @@ String PATH_TO_JSON_KEY = "path/to/your/key/file.json";
 Once this is completed, build and compile the source code using the respective feature in your IDE. The UI should now be visible and display the information dashboard.
 
 ## Contact Information
+* Hanson Nguyen - hnguy039@fiu.edu
 * Eitan Flor - eflor054@fiu.edu
 * Jerry Contreras - jcont043@fiu.edu
 * Jarret Torres - jtorres3@ufl.edu
-* Hanson Nguyen - hnguy039@fiu.edu
+
 
 ## Acknowledgements
 * [Google Cloud Vision Documentation](https://cloud.google.com/vision/docs/how-to)
